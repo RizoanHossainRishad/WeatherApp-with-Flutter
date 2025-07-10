@@ -5,6 +5,10 @@ import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:jiffy/jiffy.dart';
 
+import 'ForecastTomorrow.dart';
+import 'current_day_info.dart';
+import 'forecast_demo.dart';
+
 class WeatherApp extends StatefulWidget {
   const WeatherApp({super.key});
 
@@ -50,6 +54,9 @@ class _WeatherAppState extends State<WeatherApp> {
 
   Map<String, dynamic>? weatherMap;
   Map<String, dynamic>? forecastMap;
+  List<dynamic> tomorrowForecasts = [];
+  List<dynamic> todayForecasts = [];
+
 
   getWeather() async {
     var weather = await http.get(
@@ -72,6 +79,28 @@ class _WeatherAppState extends State<WeatherApp> {
       weatherMap = Map<String, dynamic>.from(weatherData);
       //weatherMap=Map<String,dynamic>.from(jsonDecode(weatherData)); We can also do this
       forecastMap = Map<String, dynamic>.from(forecastData);
+
+      if (forecastMap?["list"] != null) {
+        DateTime now = DateTime.now();
+        String todayStr = Jiffy.parse('${DateTime.now()}',).format(pattern: 'MMM do').toString();
+
+        var date1 = Jiffy.parse('${DateTime.now()}').format(pattern:'d');
+        int todayInt = int.parse(date1);
+
+        for (var item in forecastMap!["list"]) {
+          String dtTxt = Jiffy.parse(
+            '${item["dt_txt"]}',
+          ).format(pattern: 'MMM do').toString();
+          var date = Jiffy.parse('${item["dt_txt"]}').format(pattern:'d');
+          int dayAsInt = int.parse(date);
+          if (dtTxt.startsWith(todayStr)) {
+            print(todayInt);
+            todayForecasts.add(item);
+          }else if(todayInt + 1 == dayAsInt) {
+            tomorrowForecasts.add(item);
+          }
+        }
+      }
     });
   }
 
@@ -111,28 +140,7 @@ class _WeatherAppState extends State<WeatherApp> {
                                 fontSize: 30,
                                 letterSpacing: 2,
                                 color: Colors.white,
-                                shadows: [
-                                  Shadow(
-                                    // bottomLeft
-                                    offset: Offset(-1.5, -1.5),
-                                    color: Colors.black,
-                                  ),
-                                  Shadow(
-                                    // bottomRight
-                                    offset: Offset(1.5, -1.5),
-                                    color: Colors.black,
-                                  ),
-                                  Shadow(
-                                    // topRight
-                                    offset: Offset(1.5, 1.5),
-                                    color: Colors.black,
-                                  ),
-                                  Shadow(
-                                    // topLeft
-                                    offset: Offset(-1.5, 1.5),
-                                    color: Colors.black,
-                                  ),
-                                ],
+                                shadows: shadowStyleBold(),
                               ),
                             ),
                           ),
@@ -148,28 +156,7 @@ class _WeatherAppState extends State<WeatherApp> {
                                 letterSpacing: 2,
                                 color: Colors.white,
                                 decorationStyle: TextDecorationStyle.wavy,
-                                shadows: [
-                                  Shadow(
-                                    // bottomLeft
-                                    offset: Offset(-1.5, -1.5),
-                                    color: Colors.black,
-                                  ),
-                                  Shadow(
-                                    // bottomRight
-                                    offset: Offset(1.5, -1.5),
-                                    color: Colors.black,
-                                  ),
-                                  Shadow(
-                                    // topRight
-                                    offset: Offset(1.5, 1.5),
-                                    color: Colors.black,
-                                  ),
-                                  Shadow(
-                                    // topLeft
-                                    offset: Offset(-1.5, 1.5),
-                                    color: Colors.black,
-                                  ),
-                                ],
+                                shadows: shadowStyleBold(),
                               ),
                             ),
                           ),
@@ -180,294 +167,16 @@ class _WeatherAppState extends State<WeatherApp> {
                   ),
                 ),
 
+                SliverToBoxAdapter(child: CurrentDayInfo(weatherMap)),
 
+                SliverToBoxAdapter(child: CurrentDay(weatherMap)),
 
+                SliverToBoxAdapter(
+                  child: ForecastDemo(forecastMap, todayForecasts),
+                ),
+                SliverToBoxAdapter(
+                  child: ForecastTomorrow(tomorrowForecasts),
 
-
-
-
-
-
-                SliverList(
-                  delegate: SliverChildListDelegate([
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "${weatherMap!["main"]["temp"]!.round()}°C",
-                                style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 150,
-                                    letterSpacing: 2,
-                                    color: Colors.white,
-                                    shadows: [
-                                      Shadow(
-                                        // bottomLeft
-                                        offset: Offset(-1.5, -1.5),
-                                        color: Colors.black,
-                                      ),
-                                      Shadow(
-                                        // bottomRight
-                                        offset: Offset(1.5, -1.5),
-                                        color: Colors.black,
-                                      ),
-                                      Shadow(
-                                        // topRight
-                                        offset: Offset(1.5, 1.5),
-                                        color: Colors.black,
-                                      ),
-                                      Shadow(
-                                        // topLeft
-                                        offset: Offset(-1.5, 1.5),
-                                        color: Colors.black,
-                                      ),
-                                    ],
-                                    // Optional: ensure contrast
-                                  ),
-                                ),
-                              ),
-                              RotatedBox(
-                                quarterTurns: -1,
-                                child: Row(
-                                  children: [
-                                    Image.network(
-                                      "https://openweathermap.org/img/wn/${weatherMap!["weather"][0]["icon"]}@2x.png",
-                                      scale: 1.5,
-                                    ),
-                                    Text(
-                                      "${weatherMap!["weather"][0]["description"]!}"
-                                          .toString()
-                                          .toLowerCase()
-                                          .replaceFirstMapped(
-                                        RegExp(r'^[a-z]'),
-                                            (match) => match
-                                            .group(0)!
-                                            .toUpperCase(),
-                                      ),
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                        shadows: [
-                                          Shadow(
-                                            // bottomLeft
-                                            offset: Offset(-1.5, -1.5),
-                                            color: Colors.black,
-                                          ),
-                                          Shadow(
-                                            // bottomRight
-                                            offset: Offset(1.5, -1.5),
-                                            color: Colors.black,
-                                          ),
-                                          Shadow(
-                                            // topRight
-                                            offset: Offset(1.5, 1.5),
-                                            color: Colors.black,
-                                          ),
-                                          Shadow(
-                                            // topLeft
-                                            offset: Offset(-1.5, 1.5),
-                                            color: Colors.black,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Card(
-                                color: Colors.transparent,
-                                shadowColor: Colors.black,
-                                child: Container(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Icon(
-                                        Icons.arrow_upward,
-                                        weight: 5,
-                                        color: Colors.white,
-                                        shadows: [
-                                          Shadow(
-                                            // bottomLeft
-                                            offset: Offset(-1.5, -1.5),
-                                            color: Colors.black,
-                                          ),
-                                          Shadow(
-                                            // bottomRight
-                                            offset: Offset(1.5, -1.5),
-                                            color: Colors.black,
-                                          ),
-                                          Shadow(
-                                            // topRight
-                                            offset: Offset(1.5, 1.5),
-                                            color: Colors.black,
-                                          ),
-                                          Shadow(
-                                            // topLeft
-                                            offset: Offset(-1.5, 1.5),
-                                            color: Colors.black,
-                                          ),
-                                        ],
-                                      ),
-                                      Text(
-                                        "${weatherMap!["main"]["temp_max"]!}°C  ",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                      SizedBox(width: 3, height: 30),
-                                      Icon(
-                                        Icons.arrow_downward,
-                                        weight: 5,
-                                        color: Colors.white,
-                                        shadows: [
-                                          Shadow(
-                                            // bottomLeft
-                                            offset: Offset(-1.5, -1.5),
-                                            color: Colors.black,
-                                          ),
-                                          Shadow(
-                                            // bottomRight
-                                            offset: Offset(1.5, -1.5),
-                                            color: Colors.black,
-                                          ),
-                                          Shadow(
-                                            // topRight
-                                            offset: Offset(1.5, 1.5),
-                                            color: Colors.black,
-                                          ),
-                                          Shadow(
-                                            // topLeft
-                                            offset: Offset(-1.5, 1.5),
-                                            color: Colors.black,
-                                          ),
-                                        ],
-                                      ),
-
-                                      Text(
-                                        " ${weatherMap!["main"]["temp_min"]! - 2}°C",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Card(
-                        color: Colors.transparent,
-
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      "Feels Like",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        color: Colors.white54,
-                                      ),
-                                    ),
-                                    Text(
-                                      " ${weatherMap!["main"]["feels_like"]!}°",
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      "Humidity",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        color: Colors.white54,
-                                      ),
-                                    ),
-                                    Text(
-                                      " ${weatherMap!["main"]["humidity"]!}%",
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      "Pressure",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        color: Colors.white54,
-                                      ),
-                                    ),
-                                    Text(
-                                      " ${weatherMap!["main"]["pressure"]!}hPa",
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Padding(padding: EdgeInsets.all(30),
-                        child: Card(
-                          color: Colors.white10,
-                          child: Column(
-                            children: [
-
-                            ],
-                          ),
-                        ),
-                      ),
-                    )
-                  ]),
                 ),
               ],
             ),
@@ -477,4 +186,29 @@ class _WeatherAppState extends State<WeatherApp> {
           : Center(child: CircularProgressIndicator()),
     );
   }
+}
+
+List<Shadow> shadowStyleBold() {
+  return [
+    Shadow(
+      // bottomLeft
+      offset: Offset(-1.5, -1.5),
+      color: Colors.black,
+    ),
+    Shadow(
+      // bottomRight
+      offset: Offset(1.5, -1.5),
+      color: Colors.black,
+    ),
+    Shadow(
+      // topRight
+      offset: Offset(1.5, 1.5),
+      color: Colors.black,
+    ),
+    Shadow(
+      // topLeft
+      offset: Offset(-1.5, 1.5),
+      color: Colors.black,
+    ),
+  ];
 }
