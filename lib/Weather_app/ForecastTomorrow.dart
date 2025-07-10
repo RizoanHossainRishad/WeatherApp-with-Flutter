@@ -131,7 +131,7 @@ class ForecastTomorrow extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemCount: tomorrowForecasts!.length,
                   itemBuilder: (context, index) {
-                    return Expanded(
+                    return SingleChildScrollView(
                       child: Card(
                         shadowColor: Colors.grey,
                         color: Colors.white60,
@@ -149,20 +149,22 @@ class ForecastTomorrow extends StatelessWidget {
                                   scale: 1,
                                 ),
                               ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    Jiffy.parse(
-                                      tomorrowForecasts![index]["dt_txt"],
-                                    ).format(pattern: 'h:00 a'),
-                                  ),
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      Jiffy.parse(
+                                        tomorrowForecasts![index]["dt_txt"],
+                                      ).format(pattern: 'h:00 a'),
+                                    ),
 
-                                  Text(
-                                    "${tomorrowForecasts![index]["weather"][0]["main"]}",
-                                  ),
-                                ],
+                                    Text(
+                                      "${tomorrowForecasts![index]["weather"][0]["main"]}",
+                                    ),
+                                  ],
+                                ),
                               ),
 
                               SingleChildScrollView(
@@ -179,6 +181,7 @@ class ForecastTomorrow extends StatelessWidget {
                             ],
                           ),
                         ),
+
                       ),
                     );
                   },
