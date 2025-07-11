@@ -4,13 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:jiffy/jiffy.dart';
 
 class ForecastDemo extends StatelessWidget {
-  Map<String, dynamic>? forecastMap;
+
   List<dynamic>? todayForecasts;
 
 
 
-  ForecastDemo(Map<String, dynamic>? forecastMap,List<dynamic>? todayForecasts) {
-    this.forecastMap = forecastMap!;
+  ForecastDemo(List<dynamic>? todayForecasts) {
     this.todayForecasts=todayForecasts;
 
   }
@@ -48,11 +47,11 @@ class ForecastDemo extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text("3 Hour Forecast",
-                  style: GoogleFonts.openSans(
-                    textStyle: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                  ),),
+                    style: GoogleFonts.openSans(
+                      textStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),),
                   ),
 
                   SizedBox(
@@ -81,7 +80,7 @@ class ForecastDemo extends StatelessWidget {
                                     SingleChildScrollView(
                                       child: Expanded(
                                         child: Text(
-                                            "${todayForecasts![index]["main"]["temp"].round()}°C",
+                                          "${todayForecasts![index]["main"]["temp"].round()}°C",
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 25,

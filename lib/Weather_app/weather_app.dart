@@ -8,6 +8,7 @@ import 'package:jiffy/jiffy.dart';
 import 'ForecastTomorrow.dart';
 import 'current_day_info.dart';
 import 'forecast_demo.dart';
+import 'other_forecasts_demo.dart';
 
 class WeatherApp extends StatefulWidget {
   const WeatherApp({super.key});
@@ -56,7 +57,7 @@ class _WeatherAppState extends State<WeatherApp> {
   Map<String, dynamic>? forecastMap;
   List<dynamic> tomorrowForecasts = [];
   List<dynamic> todayForecasts = [];
-
+  List<dynamic> originalList = [];
 
   getWeather() async {
     var weather = await http.get(
@@ -79,7 +80,7 @@ class _WeatherAppState extends State<WeatherApp> {
       weatherMap = Map<String, dynamic>.from(weatherData);
       //weatherMap=Map<String,dynamic>.from(jsonDecode(weatherData)); We can also do this
       forecastMap = Map<String, dynamic>.from(forecastData);
-
+      originalList= List.from(forecastMap!["list"]);
       if (forecastMap?["list"] != null) {
         DateTime now = DateTime.now();
         String todayStr = Jiffy.parse('${DateTime.now()}',).format(pattern: 'MMM do').toString();
@@ -94,13 +95,24 @@ class _WeatherAppState extends State<WeatherApp> {
           var date = Jiffy.parse('${item["dt_txt"]}').format(pattern:'d');
           int dayAsInt = int.parse(date);
           if (dtTxt.startsWith(todayStr)) {
-            print(todayInt);
+
             todayForecasts.add(item);
+
           }else if(todayInt + 1 == dayAsInt) {
             tomorrowForecasts.add(item);
+
           }
         }
+
+        originalList = forecastMap!["list"].where((item) {
+
+          String dtTxt = Jiffy.parse('${item["dt_txt"]}').format(pattern: 'MMM do').toString();
+          var date = Jiffy.parse('${item["dt_txt"]}').format(pattern:'d');
+          int dayAsInt = int.parse(date);
+          return !dtTxt.startsWith(todayStr) && (todayInt + 1 != dayAsInt) && (todayInt<dayAsInt);
+        }).toList();
       }
+
     });
   }
 
@@ -172,11 +184,14 @@ class _WeatherAppState extends State<WeatherApp> {
                 SliverToBoxAdapter(child: CurrentDay(weatherMap)),
 
                 SliverToBoxAdapter(
-                  child: ForecastDemo(forecastMap, todayForecasts),
+                  child: ForecastDemo(todayForecasts),
                 ),
                 SliverToBoxAdapter(
                   child: ForecastTomorrow(tomorrowForecasts),
+                ),
 
+                SliverToBoxAdapter(
+                  child:OtherForecasts(originalList),
                 ),
               ],
             ),

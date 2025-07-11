@@ -1,8 +1,8 @@
 
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:jiffy/jiffy.dart';
 
 class CurrentDayInfo extends StatelessWidget {
   Map<String, dynamic>? weatherMap;
@@ -28,41 +28,41 @@ class CurrentDayInfo extends StatelessWidget {
                   Expanded(
                     child: Container(
                       width: 300,
-                        child: Text(
-                          "${weatherMap!["main"]["temp"]!.round()}°C",
-                          style: GoogleFonts.poppins(
-                            textStyle: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              fontSize: 120,
-                              letterSpacing: 2,
-                              color: Colors.white,
-                              shadows: [
-                                Shadow(
-                                  // bottomLeft
-                                  offset: Offset(-1.5, -1.5),
-                                  color: Colors.black,
-                                ),
-                                Shadow(
-                                  // bottomRight
-                                  offset: Offset(1.5, -1.5),
-                                  color: Colors.black,
-                                ),
-                                Shadow(
-                                  // topRight
-                                  offset: Offset(1.5, 1.5),
-                                  color: Colors.black,
-                                ),
-                                Shadow(
-                                  // topLeft
-                                  offset: Offset(-1.5, 1.5),
-                                  color: Colors.black,
-                                ),
-                              ],
-                              // Optional: ensure contrast
-                            ),
+                      child: Text(
+                        "${weatherMap!["main"]["temp"]!.round()}°C",
+                        style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontSize: 120,
+                            letterSpacing: 2,
+                            color: Colors.white,
+                            shadows: [
+                              Shadow(
+                                // bottomLeft
+                                offset: Offset(-1.5, -1.5),
+                                color: Colors.black,
+                              ),
+                              Shadow(
+                                // bottomRight
+                                offset: Offset(1.5, -1.5),
+                                color: Colors.black,
+                              ),
+                              Shadow(
+                                // topRight
+                                offset: Offset(1.5, 1.5),
+                                color: Colors.black,
+                              ),
+                              Shadow(
+                                // topLeft
+                                offset: Offset(-1.5, 1.5),
+                                color: Colors.black,
+                              ),
+                            ],
+                            // Optional: ensure contrast
                           ),
                         ),
                       ),
+                    ),
                   ),
 
                   RotatedBox(
@@ -188,7 +188,7 @@ class CurrentDayInfo extends StatelessWidget {
                               ),
                             ],
                           ),
-          
+
                           Text(
                             " ${weatherMap!["main"]["temp_min"]! - 2}°C",
                             style: TextStyle(
