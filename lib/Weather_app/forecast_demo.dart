@@ -55,7 +55,7 @@ class ForecastDemo extends StatelessWidget {
                   ),
 
                   SizedBox(
-                    height:MediaQuery.of(context).size.height*0.18,
+                    height:MediaQuery.of(context).size.height*0.2,
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: todayForecasts!.length,

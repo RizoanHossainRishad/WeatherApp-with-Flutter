@@ -40,7 +40,6 @@ class ForecastTomorrow extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   padding: const EdgeInsets.all(20.0),
-                  height: MediaQuery.of(context).size.height * 0.12,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(15),
@@ -65,7 +64,7 @@ class ForecastTomorrow extends StatelessWidget {
                           minRadius: 20,
                           child: Image.network(
                             "https://openweathermap.org/img/wn/${tomorrowForecasts![3]["weather"][0]["icon"]}@2x.png",
-                            scale: 1,
+                            scale: 2,
                           ),
                         ),
                         SingleChildScrollView(
@@ -126,7 +125,7 @@ class ForecastTomorrow extends StatelessWidget {
               ),
 
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.10,
+                height: MediaQuery.of(context).size.height * 0.12,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: tomorrowForecasts!.length,

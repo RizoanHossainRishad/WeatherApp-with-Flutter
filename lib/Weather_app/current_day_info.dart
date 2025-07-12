@@ -25,16 +25,14 @@ class CurrentDayInfo extends StatelessWidget {
                 mainAxisAlignment:
                 MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
-                    child: Container(
-                      width: 300,
+
+                   Container(
                       child: Text(
                         "${weatherMap!["main"]["temp"]!.round()}°C",
                         style: GoogleFonts.poppins(
                           textStyle: TextStyle(
                             fontWeight: FontWeight.normal,
-                            fontSize: 120,
-                            letterSpacing: 2,
+                            fontSize: MediaQuery.of(context).size.height*0.14,
                             color: Colors.white,
                             shadows:shadowStyleBold(),
                             // Optional: ensure contrast
@@ -42,7 +40,8 @@ class CurrentDayInfo extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ),
+
+
 
                   RotatedBox(
                     quarterTurns: -1,

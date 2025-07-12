@@ -41,9 +41,7 @@ class OtherForecasts extends StatelessWidget {
                         padding: const EdgeInsets.all(10.0),
                         child: Container(
                           width: double.infinity,
-                          height:
-                              MediaQuery.of(context).size.height *
-                              0.17, // Define height,
+                         // Define height,
                           padding: const EdgeInsets.all(8.0),
                           decoration: BoxDecoration(
                             border: Border.all(
