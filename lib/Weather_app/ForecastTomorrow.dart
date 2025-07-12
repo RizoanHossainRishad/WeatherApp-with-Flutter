@@ -130,13 +130,13 @@ class ForecastTomorrow extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemCount: tomorrowForecasts!.length,
                   itemBuilder: (context, index) {
-                    return SingleChildScrollView(
-                      child: Card(
+                    return/* SingleChildScrollView(
+                      child:*/ Card(
                         shadowColor: Colors.grey,
                         color: Colors.white60,
                         child: Container(
-                          width: MediaQuery.of(context).size.width * .43,
-                          padding: const EdgeInsets.all(10.0),
+                          width: MediaQuery.of(context).size.width * .44,
+                          padding: const EdgeInsets.all(5.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -145,43 +145,44 @@ class ForecastTomorrow extends StatelessWidget {
                                 backgroundColor: Colors.blueGrey,
                                 child: Image.network(
                                   "https://openweathermap.org/img/wn/${tomorrowForecasts![index]["weather"][0]["icon"]}@2x.png",
-                                  scale: 1,
+                                  scale: 1.2,
                                 ),
                               ),
                               Expanded(
                                 child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      Jiffy.parse(
-                                        tomorrowForecasts![index]["dt_txt"],
-                                      ).format(pattern: 'h:00 a'),
-                                    ),
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
 
-                                    Text(
-                                      "${tomorrowForecasts![index]["weather"][0]["main"]}",
-                                    ),
-                                  ],
-                                ),
+                                      Text(
+                                        Jiffy.parse(
+                                          tomorrowForecasts![index]["dt_txt"],
+                                        ).format(pattern: 'h:00 a'),
+                                      ),
+
+                                      Text(
+                                        "${tomorrowForecasts![index]["weather"][0]["main"]}",
+                                      ),
+                                    ],
+                                  ),
                               ),
 
+
                               SingleChildScrollView(
-                                child: Expanded(
-                                  child: Text(
+                                 child: Text(
                                     "${tomorrowForecasts![index]["main"]["temp"].round()}°C",
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 25,
+                                      fontSize: 20,
                                     ),
                                   ),
                                 ),
-                              ),
+
                             ],
                           ),
                         ),
 
-                      ),
+                      /*),*/
                     );
                   },
                 ),
