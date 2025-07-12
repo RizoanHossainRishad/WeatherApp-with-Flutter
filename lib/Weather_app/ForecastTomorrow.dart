@@ -135,7 +135,7 @@ class ForecastTomorrow extends StatelessWidget {
                         shadowColor: Colors.grey,
                         color: Colors.white60,
                         child: Container(
-                          width: MediaQuery.of(context).size.width * .44,
+                          width: MediaQuery.of(context).size.width * .43,
                           padding: const EdgeInsets.all(5.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -174,6 +174,7 @@ class ForecastTomorrow extends StatelessWidget {
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20,
+
                                     ),
                                   ),
                                 ),
