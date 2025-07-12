@@ -1,10 +1,10 @@
 import 'dart:convert';
+import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:jiffy/jiffy.dart';
-
 import 'ForecastTomorrow.dart';
 import 'current_day_info.dart';
 import 'forecast_demo.dart';
@@ -100,7 +100,6 @@ class _WeatherAppState extends State<WeatherApp> {
 
           }else if(todayInt + 1 == dayAsInt) {
             tomorrowForecasts.add(item);
-
           }
         }
 
@@ -123,11 +122,14 @@ class _WeatherAppState extends State<WeatherApp> {
           ? Scaffold(
         body: Stack(
           children: [
-            Image.network(
-              "https://images.unsplash.com/photo-1623062161065-bc717f5d9abd?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YXp1cmUlMjBza3l8ZW58MHx8MHx8fDA%3D",
+            Image.asset(
+              // Inline condition using Jiffy
+              (Jiffy.now().hour >= 5 && Jiffy.now().hour < 18)
+                  ? 'images/morning_background.jpg'
+                  : 'images/background.jpg',
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
-              fit: BoxFit.cover, // or BoxFit.fill or BoxFit.contain
+              fit: BoxFit.cover,
             ),
             CustomScrollView(
               slivers: [
@@ -137,7 +139,23 @@ class _WeatherAppState extends State<WeatherApp> {
                   backgroundColor: Colors.transparent,
                   expandedHeight:
                   MediaQuery.of(context).size.height * 0.01,
-
+                  flexibleSpace: ClipRRect(
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: Colors.black.withValues(alpha: 0.01),
+                            borderRadius: BorderRadius.circular(
+                                10
+                            ),
+                          ),// Optional tint
+                        ),
+                      ),
+                    ),
+                  ),
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

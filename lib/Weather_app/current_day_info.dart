@@ -36,28 +36,7 @@ class CurrentDayInfo extends StatelessWidget {
                             fontSize: 120,
                             letterSpacing: 2,
                             color: Colors.white,
-                            shadows: [
-                              Shadow(
-                                // bottomLeft
-                                offset: Offset(-1.5, -1.5),
-                                color: Colors.black,
-                              ),
-                              Shadow(
-                                // bottomRight
-                                offset: Offset(1.5, -1.5),
-                                color: Colors.black,
-                              ),
-                              Shadow(
-                                // topRight
-                                offset: Offset(1.5, 1.5),
-                                color: Colors.black,
-                              ),
-                              Shadow(
-                                // topLeft
-                                offset: Offset(-1.5, 1.5),
-                                color: Colors.black,
-                              ),
-                            ],
+                            shadows:shadowStyleBold(),
                             // Optional: ensure contrast
                           ),
                         ),
@@ -86,28 +65,7 @@ class CurrentDayInfo extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 20,
                             color: Colors.white,
-                            shadows: [
-                              Shadow(
-                                // bottomLeft
-                                offset: Offset(-1.5, -1.5),
-                                color: Colors.black,
-                              ),
-                              Shadow(
-                                // bottomRight
-                                offset: Offset(1.5, -1.5),
-                                color: Colors.black,
-                              ),
-                              Shadow(
-                                // topRight
-                                offset: Offset(1.5, 1.5),
-                                color: Colors.black,
-                              ),
-                              Shadow(
-                                // topLeft
-                                offset: Offset(-1.5, 1.5),
-                                color: Colors.black,
-                              ),
-                            ],
+                            shadows: shadowStyleBold(),
                           ),
                         ),
                       ],
@@ -121,6 +79,12 @@ class CurrentDayInfo extends StatelessWidget {
                     color: Colors.transparent,
                     shadowColor: Colors.black,
                     child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black.withValues(alpha: 0.02),
+                        borderRadius: BorderRadius.circular(
+                            15
+                        ),
+                      ),
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         mainAxisAlignment:
@@ -130,28 +94,7 @@ class CurrentDayInfo extends StatelessWidget {
                             Icons.arrow_upward,
                             weight: 5,
                             color: Colors.white,
-                            shadows: [
-                              Shadow(
-                                // bottomLeft
-                                offset: Offset(-1.5, -1.5),
-                                color: Colors.black,
-                              ),
-                              Shadow(
-                                // bottomRight
-                                offset: Offset(1.5, -1.5),
-                                color: Colors.black,
-                              ),
-                              Shadow(
-                                // topRight
-                                offset: Offset(1.5, 1.5),
-                                color: Colors.black,
-                              ),
-                              Shadow(
-                                // topLeft
-                                offset: Offset(-1.5, 1.5),
-                                color: Colors.black,
-                              ),
-                            ],
+                            shadows:shadowStyleBold(),
                           ),
                           Text(
                             "${weatherMap!["main"]["temp_max"]!}°C  ",
@@ -165,28 +108,7 @@ class CurrentDayInfo extends StatelessWidget {
                             Icons.arrow_downward,
                             weight: 5,
                             color: Colors.white,
-                            shadows: [
-                              Shadow(
-                                // bottomLeft
-                                offset: Offset(-1.5, -1.5),
-                                color: Colors.black,
-                              ),
-                              Shadow(
-                                // bottomRight
-                                offset: Offset(1.5, -1.5),
-                                color: Colors.black,
-                              ),
-                              Shadow(
-                                // topRight
-                                offset: Offset(1.5, 1.5),
-                                color: Colors.black,
-                              ),
-                              Shadow(
-                                // topLeft
-                                offset: Offset(-1.5, 1.5),
-                                color: Colors.black,
-                              ),
-                            ],
+                            shadows: shadowStyleBold(),
                           ),
 
                           Text(
@@ -222,9 +144,13 @@ class CurrentDay extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
-      child: Card(
-        color: Colors.transparent,
-
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.black.withValues(alpha: 0.45),
+          borderRadius: BorderRadius.circular(
+              25
+          ),
+        ),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Expanded(
@@ -306,3 +232,27 @@ class CurrentDay extends StatelessWidget {
   }
 }
 
+List<Shadow> shadowStyleBold() {
+  return [
+    Shadow(
+      // bottomLeft
+      offset: Offset(-1.5, -1.5),
+      color: Colors.black,
+    ),
+    Shadow(
+      // bottomRight
+      offset: Offset(1.5, -1.5),
+      color: Colors.black,
+    ),
+    Shadow(
+      // topRight
+      offset: Offset(1.5, 1.5),
+      color: Colors.black,
+    ),
+    Shadow(
+      // topLeft
+      offset: Offset(-1.5, 1.5),
+      color: Colors.black,
+    ),
+  ];
+}
