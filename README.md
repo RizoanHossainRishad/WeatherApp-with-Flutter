@@ -1,4 +1,4 @@
-# 🌦 Weather APP – Real-Time Weather App made by Flutter
+<h1 align="center"> 🌦 Weather APP – Real-Time Weather Application</h1>
 <p align="center"> - - - - - - - - - - - - - - - -||  Rizoan Hossain Rishad  ||- - - - - - - - - - - - - - - - - - - - </p>
 
 **Weather App** is a simple Flutter-based mobile application that provides **real-time weather updates** for the location you are in.  
