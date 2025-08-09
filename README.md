@@ -18,7 +18,7 @@ It fetches nearly accurate data from a weather API and displays it in a **beauti
 - **Flutter** – Cross-platform mobile framework.
 - **Dart** – Programming language for Flutter.
 - **HTTP Package** – API requests.
-- **OpenWeatherMap API** *(or replace with the API you used)*.
+- **OpenWeatherMap API** .
 
 ---
 
