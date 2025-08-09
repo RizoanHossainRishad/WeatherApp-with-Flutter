@@ -1,5 +1,6 @@
 # 🌦 Weather APP – Real-Time Weather App made by Flutter
-by Rizoan Hossain Rishad 
+<p align="center"> - - - - - - - - - - - - - - - -||  Rizoan Hossain Rishad  ||- - - - - - - - - - - - - - - - - - - - </p>
+
 **Weather App** is a simple Flutter-based mobile application that provides **real-time weather updates** for the location you are in.  
 It fetches nearly accurate data from a weather API and displays it in a **beautiful, user-friendly interface**.
 
@@ -13,7 +14,7 @@ It fetches nearly accurate data from a weather API and displays it in a **beauti
 
 ---
 
-## 🛠 Tech Stack
+## 🛠 What was used?
 - **Flutter** – Cross-platform mobile framework.
 - **Dart** – Programming language for Flutter.
 - **HTTP Package** – API requests.
@@ -21,7 +22,7 @@ It fetches nearly accurate data from a weather API and displays it in a **beauti
 
 ---
 
-## 📷 Screenshots
+## 📷 Screenshots and Video
 **DAY TIME**
 
 <p float="left">
@@ -63,3 +64,5 @@ Make sure you have Flutter installed. If not, follow the [Flutter installation g
    ```bash
    flutter run
   ```
+
+For any queries and bug detects please mail : Rizoanrishad@gmail.com 
