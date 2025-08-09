@@ -26,19 +26,19 @@ It fetches nearly accurate data from a weather API and displays it in a **beauti
 **DAY TIME**
 
 <p float="left">
-  <img src="https://github.com/RizoanHossainRishad/WeatherApp-with-Flutter/blob/main/Screenshots_and_Project_demo/Day/d1.jpg" width="150" />
-  <img src="https://github.com/RizoanHossainRishad/WeatherApp-with-Flutter/blob/main/Screenshots_and_Project_demo/Day/d2.jpg" width="150" />
-  <img src="https://github.com/RizoanHossainRishad/WeatherApp-with-Flutter/blob/main/Screenshots_and_Project_demo/Day/d3.jpg" width="150" />
-  <img src="https://github.com/RizoanHossainRishad/WeatherApp-with-Flutter/blob/main/Screenshots_and_Project_demo/Day/d4.jpg" width="150" />
+  <img src="https://github.com/RizoanHossainRishad/WeatherApp-with-Flutter/blob/main/Screenshots_and_Project_demo/Day/d1.jpg" width="200" />
+  <img src="https://github.com/RizoanHossainRishad/WeatherApp-with-Flutter/blob/main/Screenshots_and_Project_demo/Day/d2.jpg" width="200" />
+  <img src="https://github.com/RizoanHossainRishad/WeatherApp-with-Flutter/blob/main/Screenshots_and_Project_demo/Day/d3.jpg" width="200" />
+  <img src="https://github.com/RizoanHossainRishad/WeatherApp-with-Flutter/blob/main/Screenshots_and_Project_demo/Day/d4.jpg" width="200" />
 </p>
 
 **Night TIME**
 
 <p float="left">
-  <img src="https://github.com/RizoanHossainRishad/WeatherApp-with-Flutter/blob/main/Screenshots_and_Project_demo/Night/1.jpg" width="150" />
-  <img src="https://github.com/RizoanHossainRishad/WeatherApp-with-Flutter/blob/main/Screenshots_and_Project_demo/Night/2.jpg" width="150" />
-  <img src="https://github.com/RizoanHossainRishad/WeatherApp-with-Flutter/blob/main/Screenshots_and_Project_demo/Night/3.jpg" width="150" />
-  <img src="https://github.com/RizoanHossainRishad/WeatherApp-with-Flutter/blob/main/Screenshots_and_Project_demo/Night/4.jpg" width="150" />
+  <img src="https://github.com/RizoanHossainRishad/WeatherApp-with-Flutter/blob/main/Screenshots_and_Project_demo/Night/1.jpg" width="200" />
+  <img src="https://github.com/RizoanHossainRishad/WeatherApp-with-Flutter/blob/main/Screenshots_and_Project_demo/Night/2.jpg" width="200" />
+  <img src="https://github.com/RizoanHossainRishad/WeatherApp-with-Flutter/blob/main/Screenshots_and_Project_demo/Night/3.jpg" width="200" />
+  <img src="https://github.com/RizoanHossainRishad/WeatherApp-with-Flutter/blob/main/Screenshots_and_Project_demo/Night/4.jpg" width="200" />
 </p>
 
 You can also checkout the video **My device is very slow so the video might seem choppy and low display rate**
