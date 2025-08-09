@@ -48,13 +48,14 @@ You can also checkout the video **My device is very slow so the video might seem
 
 ## 📦 Installation
 Make sure you have Flutter installed. If not, follow the [Flutter installation guide](https://docs.flutter.dev/get-started/install).
-1. **Clone the repository**
+
+1.**Clone the repository**
    ```bash
    git clone https://github.com/RizoanHossainRishad/WeatherApp-with-Flutter.git
    ```
 2.**Navigate to the project folder**
    ```bash
-   cd WeatherApp
+   cd WeatherApp-with-Flutter
    ```
 3.**Get Flutter dependencies**
    ```bash
